@@ -12,6 +12,9 @@ import SwiftData
 public class DependencyManager {
     private let storage = DependencyStorage.shared
     
+    // MARK: - Init
+    public init() {}
+    
     /// Adds dependency to be used in the app. Creare instances within this method.
     /// Call this method for every dependency you want to use in your app.
     public func addDependency<T>(_ dependency: T, for protocolType: Any.Type) {

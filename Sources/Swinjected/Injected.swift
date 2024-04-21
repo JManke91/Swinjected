@@ -39,32 +39,3 @@ struct LazyInjected<T> {
     }
 }
 
-
-
-
-
-
-//@propertyWrapper
-//public struct LazyInject<Value> {
-//  // 1
-//  private let container: DIContainer
-//  private let key: String?
-//  private let mode: ResolveMode
-//  
-//  // 2
-//  private(set) public lazy var wrappedValue: Value = {
-//    if let key = self.key {
-//      return self.container.resolve(key: key, mode: self.mode)
-//    } else {
-//      return self.container.resolve(type: Value.self, mode: self.mode)
-//    }
-//  }()
-//
-//  // 3
-//  public init(container: DIContainer = DependencyContainer.shared, key: String? = nil, mode: ResolveMode = .shared) {
-//    self.container = container
-//    self.key = key
-//    self.mode = mode
-//  }
-//}
-

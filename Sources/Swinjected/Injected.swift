@@ -13,7 +13,7 @@ import Foundation
 /// API for dependency resolution. Example usage:
 /// @Injected var propertyName PropertyClass PropertyType.self
 public struct Injected<T> {
-    let wrappedValue: T
+    public let wrappedValue: T
 
     public init() {
         wrappedValue = DependencyStorage.shared.resolve()

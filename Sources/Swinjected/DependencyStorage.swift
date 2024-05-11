@@ -9,10 +9,10 @@ import Foundation
 
 import Foundation
 
-class DependencyStorage {
+public class DependencyStorage {
     // MARK: - Singleton
 
-    static var shared = DependencyStorage()
+    public static var shared = DependencyStorage()
 
     // MARK: - Private properties
 
@@ -23,7 +23,7 @@ class DependencyStorage {
         storage[id] = dependency
     }
 
-    func resolve<T>() -> T {
+    public func resolve<T>() -> T {
         let id = String(describing: T.self)
 
         // FIXME: Remove fatalerrors

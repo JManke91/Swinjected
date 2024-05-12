@@ -19,12 +19,12 @@ public class DependencyStorage {
     private var storage = [String: Any]()
 
     func add<T>(_ dependency: T, for type: Any.Type) {
-        let id = String(describing: type)
+        let id = "\(type)"
         storage[id] = dependency
     }
 
     public func resolve<T>() -> T {
-        let id = String(describing: T.self)
+        let id = "\(T.self)"
 
         // FIXME: Remove fatalerrors
         // https://medium.com/streamotion-tech-blog/magic-dependency-injection-in-swift-70476c7743ec

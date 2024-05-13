@@ -19,7 +19,7 @@ public class DependencyStorage {
     private var storage = [String: Any]()
 
     func add<T>(_ dependency: T, for type: Any.Type) {
-        let id = String(description: type)
+        let id = String(describing: type)
         storage[id] = dependency
     }
 

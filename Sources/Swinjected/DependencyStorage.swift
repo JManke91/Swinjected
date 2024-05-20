@@ -22,7 +22,7 @@ public class DependencyStorage {
 
     public init() {}
 
-    func add<T>(_ dependency: T, for type: Any.Type) {
+    public func add<T>(_ dependency: T, for type: Any.Type) {
         let id = String(describing: type)
         storage[id] = dependency
     }

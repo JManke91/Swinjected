@@ -20,4 +20,8 @@ public class DependencyManager {
     public func addDependency<T>(_ dependency: T, for protocolType: Any.Type) {
         storage.add(dependency, for: protocolType)
     }
+    
+    public func addFactory<T>(_ factory: @escaping () -> T, for protocolType: Any.Type) {
+        storage.addFactory(factory, for: protocolType)
+    }
 }

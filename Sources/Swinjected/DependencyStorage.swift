@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 public class DependencyStorage {
     // MARK: - Singleton
 
@@ -17,6 +15,7 @@ public class DependencyStorage {
     // MARK: - Private properties
 
     private var storage = [String: Any]()
+    private var factories = [String: () -> Any]()
 
     // MARK: - Init
 
@@ -26,16 +25,23 @@ public class DependencyStorage {
         let id = String(describing: type)
         storage[id] = dependency
     }
+    
+    public func addFactory<T>(_ factory: @escaping () -> T, for type: Any.Type) {
+        let id = String(describing: type)
+        factories[id] = factory
+    }
 
     public func resolve<T>() -> T {
-        let id = "\(T.self)"
-
-        // FIXME: Remove fatalerrors
-        // https://medium.com/streamotion-tech-blog/magic-dependency-injection-in-swift-70476c7743ec
-        guard let dependency = storage[id], let castedDependency = dependency as? T else {
-            fatalError("Could not resolve for \(T.self)")
+        let id = String(describing: T.self)
+        
+        if let singleton = storage[id] as? T {
+            return singleton
         }
-
-        return castedDependency
+        
+        if let factory = factories[id], let instance = factory() as? T {
+            return instance
+        }
+        
+        fatalError("Could not resolve for \(T.self)")
     }
 }

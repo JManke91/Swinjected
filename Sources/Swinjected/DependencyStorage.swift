@@ -21,11 +21,21 @@ public class DependencyStorage {
 
     public init() {}
 
+    
+    /// Adds aa singleton instance to the storage, which is uniquely used accross the app lifecycle.
+    /// - Parameters:
+    ///   - dependency: Dependency to be registered.
+    ///   - type: Type of the dependency.
     public func add<T>(_ dependency: T, for type: Any.Type) {
         let id = String(describing: type)
         storage[id] = dependency
     }
     
+    
+    /// Adds a factory creation of a class to storage, which creates a new instance every time it is resolved. This can be useful when many instances of a dependency are required, such as for viewModels in a list.
+    /// - Parameters:
+    ///   - factory: Dependency to be registered.
+    ///   - type: Type of the dependency.
     public func addFactory<T>(_ factory: @escaping () -> T, for type: Any.Type) {
         let id = String(describing: type)
         factories[id] = factory

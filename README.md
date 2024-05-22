@@ -17,7 +17,7 @@ dependencyManager.addDependency(MyDependency(), for: MyDependencyProviding.self)
 ```
 for singleton usage, or
 ```
-dependencyManager.addFactory(MyDependency(), for: MyDependency.self)
+dependencyManager.addFactory(MyDependency.init, for: MyDependency.self)
 ```
 for Trasnsient dependencies.
 

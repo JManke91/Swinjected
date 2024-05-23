@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 @propertyWrapper
 /// API for dependency resolution. Example usage:
 /// @Injected var propertyName PropertyClass PropertyType.self

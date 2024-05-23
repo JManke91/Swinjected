@@ -9,7 +9,7 @@ import Foundation
 
 public class DependencyStorage {
     
-    private static var lock = NSLock()
+    private var lock = NSLock()
     
     // MARK: - Singleton
 

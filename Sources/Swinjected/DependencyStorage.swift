@@ -8,17 +8,19 @@
 import Foundation
 
 public class DependencyStorage {
+    
+    private static var lock = NSLock()
+    
     // MARK: - Singleton
 
     public static var shared = DependencyStorage()
+    private static var testStorage: DependencyStorage?
 
     // MARK: - Private properties
 
     private var storage = [String: Any]()
     private var factories = [String: () -> Any]()
     
-    private static var testStorage: DependencyStorage?
-
     // MARK: - Init
 
     public init() {}
@@ -29,6 +31,8 @@ public class DependencyStorage {
     ///   - dependency: Dependency to be registered.
     ///   - type: Type of the dependency.
     public func add<T>(_ dependency: T, for type: Any.Type) {
+        defer { lock.unlock() }
+        lock.lock()
         let id = String(describing: type)
         storage[id] = dependency
     }
@@ -39,11 +43,15 @@ public class DependencyStorage {
     ///   - factory: Dependency to be registered.
     ///   - type: Type of the dependency.
     public func addFactory<T>(_ factory: @escaping () -> T, for type: Any.Type) {
+        defer { lock.unlock() }
+        lock.lock()
         let id = String(describing: type)
         factories[id] = factory
     }
 
     public func resolve<T>() -> T {
+        defer { lock.unlock() }
+        lock.lock()
         let id = String(describing: T.self)
         
         if let singleton = storage[id] as? T {
@@ -60,6 +68,8 @@ public class DependencyStorage {
     // MARK: - Testing Support
     
     public static func setupTestStorage(_ setup: (DependencyStorage) -> Void) {
+        defer { lock.unlock() }
+        lock.lock()
         let testStorage = DependencyStorage()
         setup(testStorage)
         self.testStorage = testStorage

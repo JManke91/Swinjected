@@ -14,7 +14,6 @@ public class DependencyStorage {
     // MARK: - Singleton
 
     public static var shared = DependencyStorage()
-    private static var testStorage: DependencyStorage?
 
     // MARK: - Private properties
 

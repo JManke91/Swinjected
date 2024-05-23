@@ -64,25 +64,4 @@ public class DependencyStorage {
         
         fatalError("Could not resolve for \(T.self)")
     }
-    
-    // MARK: - Testing Support
-    
-    public static func setupTestStorage(_ setup: (DependencyStorage) -> Void) {
-        let testStorage = DependencyStorage()
-        setup(testStorage)
-        self.testStorage = testStorage
-    }
-    
-    public static func useTestStorage() {
-        if let testStorage = testStorage {
-            DependencyStorage.shared = testStorage
-        } else {
-            fatalError("Test storage is not set up. Call setupTestStorage first.")
-        }
-    }
-    
-    public static func resetToDefault() {
-        DependencyStorage.shared = DependencyStorage()
-        testStorage = nil
-    }
 }

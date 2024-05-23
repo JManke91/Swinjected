@@ -68,8 +68,6 @@ public class DependencyStorage {
     // MARK: - Testing Support
     
     public static func setupTestStorage(_ setup: (DependencyStorage) -> Void) {
-        defer { lock.unlock() }
-        lock.lock()
         let testStorage = DependencyStorage()
         setup(testStorage)
         self.testStorage = testStorage

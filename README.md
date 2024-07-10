@@ -27,3 +27,6 @@ In any file you want to use one of your previously registered dependencies, simp
 @Injected var myDependency: MyDependencyProviding
 ```
 and your dependeny is ready to be used.
+
+# What's still missing
+Currently the user has to be aware of the dependency tree when using the `DependencyManager` to register dependencies using `addDependency`. That means if dependency A is regisered before dependency B, while A is dependent on B, the app will crash because when resolving at runtime, the dependency B cannot be resolved as it has not been registered yet.

@@ -18,3 +18,19 @@ public struct Injected<T> {
     }
 }
 
+@propertyWrapper
+public struct LazyInjected<T> {
+    private var cached: T?
+
+    public var wrappedValue: T {
+        mutating get {
+            if cached == nil {
+                cached = DependencyStorage.shared.resolve() as T
+            }
+            return cached!
+        }
+    }
+
+    public init() {}
+}
+

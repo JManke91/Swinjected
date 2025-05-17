@@ -11,7 +11,7 @@ At the entry point of your app (YourAppNameApp.swift) maake sure to `import Swin
 ```
 let dependencyManager = DependencyManager()
 ```
-and add any dependency you would like to use, e.g. `MyDependency: MyDependencyProviding` to the `DependencyManager`. Depending on, if the dependency should be a unique single instance, or a Trasnsient instance, that is created every time the dependendy is resolved, you choose to register the dependencies either using
+and add any dependency you would like to use, e.g. `MyDependency: MyDependencyProviding` to the `DependencyManager`. Depending on, if the dependency should be a unique single instance, or a Transient instance, that is created every time the dependency is resolved, you choose to register the dependencies either using
 ```
 dependencyManager.addDependency(MyDependency(), for: MyDependencyProviding.self)
 ```
@@ -19,7 +19,7 @@ for singleton usage, or
 ```
 dependencyManager.addFactory(MyDependency.init, for: MyDependency.self)
 ```
-for Trasnsient dependencies.
+for Transient dependencies. Attention: If the dependencies depend on each other, the order of dependency registration is important, otherwise they cannot be resolved properly.
 
 ## Use Dependencies
 In any file you want to use one of your previously registered dependencies, simply `import Swinjected` and 

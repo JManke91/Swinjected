@@ -8,17 +8,16 @@
 import Foundation
 
 public class DependencyStorage {
-    
-    private var lock = NSLock()
-    
-    // MARK: - Singleton
-
-    public static var shared = DependencyStorage()
 
     // MARK: - Private properties
 
     private var storage = [String: Any]()
     private var factories = [String: () -> Any]()
+    private var lock = NSLock()
+    
+    // MARK: - Singleton
+
+    public static var shared = DependencyStorage()
     
     // MARK: - Init
 
